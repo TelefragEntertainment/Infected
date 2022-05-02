@@ -1,4 +1,4 @@
-# mpmod
+# Infected
  Infected mod for Quake.
 
 Humans must fight off the infected hell hounds. Health, ammo, and weapons, can be found randomly around the level.
