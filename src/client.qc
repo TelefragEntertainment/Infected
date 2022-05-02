@@ -1429,7 +1429,7 @@ void(entity targ, entity attacker) ClientObituary =
 		{
 			bprint (targ.netname);
 			bprint (" was cleansed by ");
-			bprint (attacker.owner.netname);
+			bprint (attacker.netname);
 			bprint ("\n");
 			
 			attacker.frags = attacker.frags + 1;
