@@ -1,7 +1,7 @@
 # Infected
- Infected mod for Quake.!
+ Infected mod for Quake.
  
- [infectedImg](https://user-images.githubusercontent.com/23513128/166387636-bcfa5bc5-bf6a-4007-ae78-c3eef7ec9c04.png)
+ ![infectedImg](https://user-images.githubusercontent.com/23513128/166387636-bcfa5bc5-bf6a-4007-ae78-c3eef7ec9c04.png)
 
 Humans must fight off the infected hell hounds. Health, ammo, and weapons, can be found randomly around the level.
 
