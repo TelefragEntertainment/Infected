@@ -447,11 +447,10 @@ void() PutObserverInServer =
 	spot = SelectSpawnPoint ();
 
 	self.classname = "player";
-	//self.health = GetMaxHealth();
-	self.health = 2;
-	self.takedamage = DAMAGE_AIM;
-	self.solid = SOLID_TRIGGER;
-	self.movetype = MOVETYPE_WALK;
+	self.health = 999;
+	self.takedamage = DAMAGE_NO;
+	self.solid = SOLID_NOT;
+	self.movetype = MOVETYPE_NOCLIP;
 	self.show_hostile = 0;
 	self.max_health = self.health;
 	self.flags = FL_CLIENT;
@@ -480,21 +479,13 @@ void() PutObserverInServer =
 	self.fixangle = TRUE;
 
 	setmodel (self, "progs/eyes.mdl");
-	modelindex_eyes = self.modelindex;
+	//modelindex_eyes = self.modelindex;
 
 	setsize (self, VEC_HULL_MIN, VEC_HULL_MAX);
 
 	self.view_ofs = '0 0 22';
 
 	player_stand1 ();
-
-	if (deathmatch || coop)
-	{
-		makevectors(self.angles);
-		spawn_tfog (self.origin + v_forward*20);
-	}
-
-	spawn_tdeath (self.origin, self);
 
 	stuffcmd(self,"-attack\n");
 }
