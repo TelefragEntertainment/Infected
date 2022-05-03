@@ -1817,13 +1817,13 @@ void() Host_CheckGameState =
 			return;
 		}
 		
-		//Humans win (currently only if zombies leave the game, TODO: set a timer)
 		if(zcount <= 0)
 		{
 			dprint("Humans win!\n");
-			MessageAllClients("The Living Prevail! \nHell's Minions Have Retreated for now...\n\n");
 			gamestate = STATE_END;
-			host_checkStateTime = 500;
+			host_checkStateTime = 250;
+			MessageAllClients("The Living Prevail! \nHell's Minions Have Retreated for now...\n\n\n");
+			return;
 		}
 
 		// No humans left.
