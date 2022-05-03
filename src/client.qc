@@ -559,7 +559,7 @@ void() PutDogInServer =
 
 	stuffcmd(self,"-attack\n");
 
-	self.itemdrop1time = time + 5 + random() * 30;
+	self.itemdrop1time = time + 5 + random() * 20;
 	self.itemdroppos = '999 999 999';
 }
 
@@ -1243,7 +1243,7 @@ void() PlayerPostThink =
 		{
 			if(self.itemdroppos == '999 999 999')
 			{
-				if(time > self.itemdrop1time - 5)
+				if(time > self.itemdrop1time - 10)
 				{
 					self.itemdroppos = self.origin + '0 0 1';
 				}
@@ -1842,7 +1842,7 @@ void() Host_CheckGameState =
 void() RemoveDropItem = 
 {
 	self.owner.itemdrop1 = 0;
-	self.owner.itemdrop1time = time + 5 + random() * 30;
+	self.owner.itemdrop1time = time + 5 + random() * 20;
 	self.owner.itemdroppos = '999 999 999';
 	remove(self);
 }
@@ -1959,7 +1959,7 @@ void() DogDropItem =
 	item.movetype = MOVETYPE_TOSS;
 	item.touch = DropItemTouch;
 
-	item.nextthink = time + 30;
+	item.nextthink = time + 15;
 	item.think = RemoveDropItem;
 
 	self.itemdrop1 = item;
