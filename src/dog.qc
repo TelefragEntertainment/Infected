@@ -291,6 +291,9 @@ void() GibDog =
 
 void() dog_die =
 {
+	if(host_checkStateTime < 10)
+		host_checkStateTime = 10;
+		
 	self.items = 0;
 	self.invisible_finished = 0;
 	self.invincible_finished = 0;

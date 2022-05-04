@@ -533,7 +533,7 @@ void() PlayerDie =
 		dog_die();
 		return;
 	}
-	if(host_checkStateTime < 10)
+	if(gamestate != STATE_END && host_checkStateTime < 10)
 		host_checkStateTime = 10;
 
 	local	float	i;

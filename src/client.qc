@@ -559,7 +559,7 @@ void() PutDogInServer =
 
 	stuffcmd(self,"-attack\n");
 
-	self.itemdrop1time = time + 5 + random() * 20;
+	self.itemdrop1time = time + 1 + random() * 5;
 	self.itemdroppos = '999 999 999';
 }
 
@@ -737,7 +737,7 @@ void() CheckRules =
 {
 	local	float		timelimit;
 
-	if (gameover)	// someone else quit the game already
+	if (gameover || gamestate == STATE_END)	// someone else quit the game already
 		return;
 
 	timelimit = 600; //10 minutes
@@ -747,7 +747,7 @@ void() CheckRules =
 		dprint("Humans win!\n");
 		MessageAllClients("The Living Prevail! \nHell's Minions Have Retreated for now...\n\n");
 		gamestate = STATE_END;
-		host_checkStateTime = 500;
+		host_checkStateTime = 250;
 		return;
 	}
 
@@ -1842,7 +1842,7 @@ void() Host_CheckGameState =
 void() RemoveDropItem = 
 {
 	self.owner.itemdrop1 = 0;
-	self.owner.itemdrop1time = time + 5 + random() * 20;
+	self.owner.itemdrop1time = time + 5 + random() * 15;
 	self.owner.itemdroppos = '999 999 999';
 	remove(self);
 }
