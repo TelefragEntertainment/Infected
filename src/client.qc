@@ -810,10 +810,7 @@ void() PlayerJump =
 	{
 		if (self.watertype == CONTENT_WATER)
 		{
-			if(self.isHuman)
-				self.velocity_z = 100;
-			else
-				self.velocity_z = 250;
+			self.velocity_z = 100;
 		}
 		else if (self.watertype == CONTENT_SLIME)
 			self.velocity_z = 80;
@@ -966,56 +963,28 @@ void() CheckWaterJump =
 {
 	local vector start, end;
 
-	if(self.isHuman)
-	{
-		// check for a jump-out-of-water
-		makevectors (self.angles);
-		start = self.origin;
-		start_z = start_z + 8;
-		v_forward_z = 0;
-		normalize(v_forward);
+	// check for a jump-out-of-water
+	makevectors (self.angles);
+	start = self.origin;
+	start_z = start_z + 8;
+	v_forward_z = 0;
+	normalize(v_forward);
+	end = start + v_forward*24;
+	
+	traceline (start, end, TRUE, self);
+	if (trace_fraction < 1)
+	{	// solid at waist
+		start_z = start_z + self.maxs_z - 8;
 		end = start + v_forward*24;
+		self.movedir = trace_plane_normal * -50;
 		traceline (start, end, TRUE, self);
-		if (trace_fraction < 1)
-		{	// solid at waist
-			start_z = start_z + self.maxs_z - 8;
-			end = start + v_forward*24;
-			self.movedir = trace_plane_normal * -50;
-			traceline (start, end, TRUE, self);
-			if (trace_fraction == 1)
-			{	// open at eye level
-				self.flags = self.flags | FL_WATERJUMP;
-				self.velocity_z = 235;
-				self.flags = self.flags - (self.flags & FL_JUMPRELEASED);
-				self.teleport_time = time + 2;	// safety net
-				return;
-			}
-		}
-	}
-	else
-	{
-		// check for a jump-out-of-water
-		makevectors (self.angles);
-		start = self.origin;
-		start_z = start_z + 8;
-		v_forward_z = 0;
-		normalize(v_forward);
-		end = start + v_forward*24;
-		traceline (start, end, TRUE, self);
-		if (trace_fraction < 1)
-		{	// solid at waist
-			start_z = start_z + self.maxs_z - 1;
-			end = start + v_forward*24;
-			self.movedir = trace_plane_normal * -50;
-			traceline (start, end, TRUE, self);
-			if (trace_fraction == 1)
-			{	// open at eye level
-				self.flags = self.flags | FL_WATERJUMP;
-				self.velocity_z = 435;
-				self.flags = self.flags - (self.flags & FL_JUMPRELEASED);
-				self.teleport_time = time + 2;	// safety net
-				return;
-			}
+		if (trace_fraction == 1)
+		{	// open at eye level
+			self.flags = self.flags | FL_WATERJUMP;
+			self.velocity_z = 235;
+			self.flags = self.flags - (self.flags & FL_JUMPRELEASED);
+			self.teleport_time = time + 2;	// safety net
+			return;
 		}
 	}
 };
@@ -1051,7 +1020,7 @@ void() PlayerPreThink =
 	CheckRules ();
 	WaterMove ();
 
-	if (self.waterlevel == 2)
+	if (self.waterlevel == 2 || (!self.isHuman && self.waterlevel ==1))
 		CheckWaterJump ();
 
 	if (self.deadflag >= DEAD_DEAD && !self.isObserver)

@@ -110,7 +110,7 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 		return;
 	}
 
-	if(attacker.classname == "player" && attacker.isHuman == targ.isHuman) // ignore team damage
+	if(attacker.classname == "player" && attacker.isHuman == targ.isHuman && targ.classname == "player") // ignore team damage
 	{
 		return;
 	}
