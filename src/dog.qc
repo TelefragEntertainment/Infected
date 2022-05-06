@@ -479,13 +479,15 @@ void() W_FireDogBite =
 	org = trace_endpos - v_forward*4;
 
 	//self.velocity = self.velocity + v_forward*100;
-
+	if (trace_ent.takedamage)
+	{
+		T_Damage (trace_ent, self, self, self.zombLevel < 4 ? 20 : 25);
+	}
+		
 	if (trace_ent.takedamage && trace_ent.isHuman)
 	{
 		trace_ent.axhitme = 1;
 		SpawnBlood (org, '0 0 0', 20);
-		T_Damage (trace_ent, self, self, self.zombLevel < 4 ? 20 : 25);
-
 		sound (self, CHAN_WEAPON, "player/pain1.wav", 1, ATTN_NORM);
 		stuffcmd(self, "bf\n");
 	}
